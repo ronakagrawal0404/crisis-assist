@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crisis Assist – When emergencies happen, clarity matters.</title>
+  <meta name="description" content="AI-powered emergency recovery platform offering structured recovery plans, scam verification, and travel assistance. Get clear actionable guidance when you need it most.">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Particle background container for global feel -->
+  <div class="particles-container" id="global-particles"></div>
+
+  <!-- Header Navigation -->
+  <header class="main-header" id="main-header">
+    <div class="nav-container">
+      <a href="#" class="logo" onclick="app.showPage('landing')">
+        <div class="logo-icon">
+          <i data-lucide="shield-alert"></i>
+        </div>
+        <span>Crisis Assist</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="#" class="nav-link active" id="nav-home" onclick="app.showPage('landing')">Home</a>
+        <a href="#" class="nav-link" id="nav-dashboard" onclick="app.showPage('dashboard')">Dashboard</a>
+        <a href="#" class="nav-link" onclick="app.openModule('ai_assistant')" title="AI Assistant" style="display: inline-flex; align-items: center; gap: 6px;">
+          <i data-lucide="bot" style="width: 18px; height: 18px;"></i>
+          <span>AI Assistant</span>
+        </a>
+        <a href="#" class="nav-link nav-icon-link" onclick="app.toggleHistoryPanel(true)" title="History" style="display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 0.8rem;">
+          <i data-lucide="history" style="width: 18px; height: 18px;"></i>
+          <span class="nav-hover-label">History</span>
+        </a>
+        <a href="#" class="nav-link nav-icon-link" onclick="app.toggleSettingsPanel(true)" title="Settings" style="display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 0.8rem;">
+          <i data-lucide="settings" style="width: 18px; height: 18px;"></i>
+        </a>
+      </nav>
+      
+      <div class="menu-btn" onclick="app.toggleMobileMenu()">
+        <i data-lucide="menu"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       VIEW 1: LANDING PAGE
+       ========================================================================== -->
+  <div id="landing-view" class="view">
+    <!-- Hero Section -->
+    <section class="hero" id="hero-section">
+      <div class="hero-bg-wrapper">
+        <img src="assets/panic_lady.jpg" alt="Crisis Assist Background" class="hero-bg" id="hero-parallax-bg">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-vignette"></div>
+      
+      <!-- Floating Glass Elements -->
+      <div class="floating-glass glass-card fg-1" style="transform: translate(15px, -10px);">
+        <div class="floating-glass-indicator orange"></div>
+        <span>Simulating Device Location...</span>
+      </div>
+      <div class="floating-glass glass-card fg-2" style="transform: translate(-20px, 15px);">
+        <div class="floating-glass-indicator green"></div>
+        <span>Securing UPI Account...</span>
+      </div>
+      <div class="floating-glass glass-card fg-3" style="transform: translate(10px, 20px);">
+        <div class="floating-glass-indicator purple"></div>
+        <span>Scam Risk Score: 94% High</span>
+      </div>
+
+      <div class="hero-content">
+        <h1>Crisis Assist</h1>
+        <h2>When emergencies happen, clarity matters.</h2>
+        <p>AI-powered assistance for lost phones, cyber fraud, lost wallets, travel disruptions, and scam analysis. Get personalized guidance through structured recovery plans and actionable checklists when you need them most.</p>
+        
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="app.showPage('dashboard')">
+            Get Started <i data-lucide="arrow-right"></i>
+          </button>
+          <button class="btn btn-secondary" onclick="app.scrollToSection('features')">
+            Explore Features
+          </button>
+        </div>
+      </div>
+
+      <div class="scroll-indicator" onclick="app.scrollToSection('features')">
+        <span>Scroll Down</span>
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Strip -->
+    <section class="trust-strip">
+      <div class="strip-container">
+        <h2 class="strip-title">Platform Features & Assistance</h2>
+        <div class="strip-grid">
+          <div class="glass-card glass-card-hover strip-card" onclick="app.openModule('phone')">
+            <i data-lucide="smartphone" class="strip-icon"></i>
+            <h3>Lost Phone Recovery</h3>
+          </div>
+          <div class="glass-card glass-card-hover success-glow strip-card" onclick="app.openModule('fraud')">
+            <i data-lucide="shield-x" class="strip-icon" style="color: var(--accent-green);"></i>
+            <h3>Cyber Fraud Assistance</h3>
+          </div>
+          <div class="glass-card glass-card-hover strip-card" onclick="app.openModule('wallet')">
+            <i data-lucide="wallet" class="strip-icon"></i>
+            <h3>Lost Wallet Recovery</h3>
+          </div>
+          <div class="glass-card glass-card-hover purple-glow strip-card" onclick="app.openModule('travel')">
+            <i data-lucide="plane-takeoff" class="strip-icon" style="color: var(--accent-purple);"></i>
+            <h3>Travel Emergency Help</h3>
+          </div>
+          <div class="glass-card glass-card-hover strip-card" onclick="app.openModule('analyzer')">
+            <i data-lucide="file-search-2" class="strip-icon"></i>
+            <h3>AI Scam & Content Analyzer</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Feature Details Grid -->
+    <section class="features-section" id="features">
+      <div class="section-header">
+        <h2>Intelligent Recovery Workflows</h2>
+        <p>Select an emergency recovery workflow below to begin the step-by-step guidance protocol.</p>
+      </div>
+
+      <div class="feature-cards-grid">
+        <!-- Phone Card -->
+        <div class="glass-card glass-card-hover feature-card">
+          <div class="feature-img-wrapper">
+            <img src="assets/lost_phone.jpg" alt="Lost Phone" class="feature-img">
+            <span class="feature-badge">Lost Phone</span>
+          </div>
+          <div class="feature-card-content">
+            <h3>Lost Phone Recovery</h3>
+            <p>Help users recover or secure a missing device using guided questioning and personalized action plans.</p>
+            <button class="btn btn-outline-orange" onclick="app.openModule('phone')">
+              Recover Device <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cyber Fraud Card -->
+        <div class="glass-card glass-card-hover success-glow feature-card">
+          <div class="feature-img-wrapper">
+            <img src="assets/cyber_fraud.jpg" alt="Cyber Fraud" class="feature-img">
+            <span class="feature-badge" style="border-color: rgba(0, 230, 118, 0.3); color: var(--accent-green);">Cyber Scam</span>
+          </div>
+          <div class="feature-card-content">
+            <h3>Cyber Fraud Assistant</h3>
+            <p>Understand the incident first, then generate structured recovery steps including banking protection and evidence preservation.</p>
+            <button class="btn btn-outline-orange" style="border-color: var(--accent-green); color: var(--accent-green);" onclick="app.openModule('fraud')">
+              Start Recovery <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lost Wallet Card -->
+        <div class="glass-card glass-card-hover feature-card">
+          <div class="feature-img-wrapper">
+            <img src="assets/lost_wallet.png" alt="Lost Wallet" class="feature-img">
+            <span class="feature-badge">Lost Wallet</span>
+          </div>
+          <div class="feature-card-content">
+            <h3>Lost Wallet Recovery</h3>
+            <p>Create customized recovery plans depending on which documents or cards were lost. Skip the steps you don't need.</p>
+            <button class="btn btn-outline-orange" onclick="app.openModule('wallet')">
+              Recover Wallet <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Travel Assistant Card -->
+        <div class="glass-card glass-card-hover purple-glow feature-card">
+          <div class="feature-img-wrapper">
+            <img src="assets/travel_emergency.jpg" alt="Travel Emergency" class="feature-img">
+            <span class="feature-badge" style="border-color: rgba(124, 77, 255, 0.3); color: var(--accent-purple);">Travel</span>
+          </div>
+          <div class="feature-card-content">
+            <h3>Travel Assistant</h3>
+            <p>Help users recover from missed transport, lost baggage, or being stranded with actionable recommendations.</p>
+            <button class="btn btn-outline-orange" style="border-color: var(--accent-purple); color: var(--accent-purple);" onclick="app.openModule('travel')">
+              Travel Help <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AI Scam & Content Analyzer Card -->
+        <div class="glass-card glass-card-hover feature-card">
+          <div class="feature-img-wrapper">
+            <img src="assets/scam_analyzer.jpg" alt="Scam Analyzer" class="feature-img">
+            <span class="feature-badge">AI Analyzer</span>
+          </div>
+          <div class="feature-card-content">
+            <h3>AI Scam & Content Analyzer</h3>
+            <p>Analyze suspicious links, messages, images, and videos from one unified workspace with high detail scanning.</p>
+            <button class="btn btn-outline-orange" onclick="app.openModule('analyzer')">
+              Analyze Content <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- AI Assistant Card -->
+        <div class="glass-card glass-card-hover purple-glow feature-card">
+          <div class="feature-img-wrapper">
+            <img src="assets/ai_assistant.png" alt="AI Assistant" class="feature-img">
+            <span class="feature-badge" style="border-color: rgba(124, 77, 255, 0.3); color: var(--accent-purple);">AI Assistant</span>
+          </div>
+          <div class="feature-card-content">
+            <h3>AI Assistant</h3>
+            <p>Get instant guidance for emergencies and everyday questions through an intelligent conversational assistant. Describe your situation in natural language and receive personalized step-by-step recommendations.</p>
+            <button class="btn btn-outline-orange" style="border-color: var(--accent-purple); color: var(--accent-purple);" onclick="app.openModule('ai_assistant')">
+              Start Chat <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>A systematic recovery workflow engineered to restore security and order.</p>
+      </div>
+      
+      <div class="timeline-container">
+        <!-- Step 1 -->
+        <div class="timeline-item">
+          <div class="timeline-badge">1</div>
+          <div class="timeline-img-side"></div>
+          <div class="timeline-content-side">
+            <div class="glass-card timeline-card">
+              <h3>Describe Your Emergency</h3>
+              <p>Select the corresponding category and describe the critical event to initialize the protocol.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="timeline-item">
+          <div class="timeline-badge">2</div>
+          <div class="timeline-img-side"></div>
+          <div class="timeline-content-side">
+            <div class="glass-card timeline-card">
+              <h3>AI Diagnostic Questions</h3>
+              <p>Answer specific, non-invasive diagnostic questions that gather crucial details about the security incident.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="timeline-item">
+          <div class="timeline-badge">3</div>
+          <div class="timeline-img-side"></div>
+          <div class="timeline-content-side">
+            <div class="glass-card timeline-card">
+              <h3>Personalized Recovery Workflow</h3>
+              <p>Receive a custom-designed recovery checklist prioritized by urgency (Critical, High, Recommended) instantly.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="timeline-item">
+          <div class="timeline-badge">4</div>
+          <div class="timeline-img-side"></div>
+          <div class="timeline-content-side">
+            <div class="glass-card timeline-card">
+              <h3>Action & Progress Tracking</h3>
+              <p>Check off tasks as you execute them. Access direct official links and tools to secure your assets.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 5 -->
+        <div class="timeline-item">
+          <div class="timeline-badge">5</div>
+          <div class="timeline-img-side"></div>
+          <div class="timeline-content-side">
+            <div class="glass-card timeline-card">
+              <h3>Protect & Monitor</h3>
+              <p>Complete follow-up suggestions, secure backups, and monitor activity to prevent recurring incidents.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Crisis Assist -->
+    <section class="why-choose-us">
+      <div class="section-header">
+        <h2>Why Crisis Assist</h2>
+        <p>Engineered for high stress scenarios where quick decisions make all the difference.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="glass-card why-card">
+          <div class="why-icon"><i data-lucide="brain"></i></div>
+          <h3>AI-Guided Decision Making</h3>
+          <p>Get instant response paths tailored specifically to your exact situation details.</p>
+        </div>
+
+        <div class="glass-card why-card green-theme">
+          <div class="why-icon"><i data-lucide="alert-octagon"></i></div>
+          <h3>Priority-Based Recovery</h3>
+          <p>We prioritize critical actions first (like locking cards) before secondary documentation steps.</p>
+        </div>
+
+        <div class="glass-card why-card">
+          <div class="why-icon"><i data-lucide="check-square"></i></div>
+          <h3>Personalized Checklists</h3>
+          <p>We only present tasks relevant to your input. No unnecessary form-filling or general info-dumps.</p>
+        </div>
+
+        <div class="glass-card why-card green-theme">
+          <div class="why-icon"><i data-lucide="plane"></i></div>
+          <h3>Emergency Travel Support</h3>
+          <p>Quick access to map coordinates, transit solutions, and support hubs if you get stranded.</p>
+        </div>
+
+        <div class="glass-card why-card">
+          <div class="why-icon"><i data-lucide="scan-face"></i></div>
+          <h3>Scam Detection Assistance</h3>
+          <p>Verify suspicious SMS, phone numbers, links, screenshots, or videos in a single sandbox workspace.</p>
+        </div>
+
+        <div class="glass-card why-card green-theme">
+          <div class="why-icon"><i data-lucide="smartphone"></i></div>
+          <h3>Modern Responsive Experience</h3>
+          <p>Clean interface optimized to work flawlessly on low-bandwidth and mobile screens during emergencies.</p>
+        </div>
+
+        <div class="glass-card why-card">
+          <div class="why-icon"><i data-lucide="eye-off"></i></div>
+          <h3>Privacy-Focused Workflows</h3>
+          <p>We do not store your private documents or credentials. Your diagnostic details remain secure in browser memory.</p>
+        </div>
+
+        <div class="glass-card why-card green-theme">
+          <div class="why-icon"><i data-lucide="compass"></i></div>
+          <h3>Easy-to-Follow Action Plans</h3>
+          <p>Short explanations, links to official pages, and clear instructions reduce panic and anxiety.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="final-cta-bg"></div>
+      <div class="final-cta-content">
+        <h2>Don't panic. Start with the next best step.</h2>
+        <p>Enter the emergency response command center and secure your assets right now.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="app.showPage('dashboard')">
+            Launch Assistant <i data-lucide="activity"></i>
+          </button>
+          <button class="btn btn-secondary" onclick="app.scrollToSection('features')">
+            Explore Features
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <a href="#" class="logo" style="margin-bottom: 1rem;">
+            <div class="logo-icon">
+              <i data-lucide="shield-alert"></i>
+            </div>
+            <span>Crisis Assist</span>
+          </a>
+          <p>When emergencies happen, clarity matters. AI-powered diagnostic recovery checklists and scam content analyzer.</p>
+        </div>
+        
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#" onclick="app.showPage('landing')">Home</a></li>
+            <li><a href="#" onclick="app.showPage('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="app.scrollToSection('features')">Features</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-col">
+          <h4>Assistance</h4>
+          <ul>
+            <li><a href="#" onclick="app.openModule('phone')">Lost Phone</a></li>
+            <li><a href="#" onclick="app.openModule('fraud')">Cyber Fraud</a></li>
+            <li><a href="#" onclick="app.openModule('wallet')">Lost Wallet</a></li>
+            <li><a href="#" onclick="app.openModule('travel')">Travel Help</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Support & Privacy</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Emergency Contacts</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Crisis Assist Platform. All rights reserved.</p>
+        <p>Built with privacy-first client-side encryption. Clarity over panic.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================================
+       VIEW 2: CENTRAL EMERGENCY DASHBOARD
+       ========================================================================== -->
+  <div id="dashboard-view" class="view hidden">
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <div class="dashboard-title">
+          <h2><i data-lucide="layout-grid" style="color: var(--accent-orange);"></i> Emergency Command Center</h2>
+          <p style="color: var(--text-secondary); margin-top: 5px;">Select the module corresponding to your active emergency below to generate an immediate response workflow.</p>
+        </div>
+        <div class="dashboard-status">
+          <span class="dashboard-status-indicator"></span>
+          <span>Secure Incident Monitor Active</span>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Lost Phone -->
+        <div class="glass-card glass-card-hover animated-border-card dashboard-module-card" onclick="app.openModule('phone')">
+          <div class="dashboard-card-img-wrapper">
+            <img src="assets/lost_phone.jpg" alt="Lost Phone Recovery" class="dashboard-card-img">
+            <div class="dashboard-card-img-overlay"></div>
+          </div>
+          <div class="dashboard-module-content">
+            <div class="dashboard-module-header">
+              <div class="dashboard-module-icon">
+                <i data-lucide="smartphone"></i>
+              </div>
+              <div class="dashboard-module-arrow">
+                <i data-lucide="arrow-right"></i>
+              </div>
+            </div>
+            <div class="dashboard-module-text">
+              <h3>Lost Phone Recovery</h3>
+              <p>Guided diagnostics, remote tracking triggers, and SIM/banking session lock sequences.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cyber Fraud -->
+        <div class="glass-card glass-card-hover animated-border-card success-glow dashboard-module-card cyan-card" onclick="app.openModule('fraud')">
+          <div class="dashboard-card-img-wrapper">
+            <img src="assets/cyber_fraud.jpg" alt="Cyber Fraud Assistant" class="dashboard-card-img">
+            <div class="dashboard-card-img-overlay"></div>
+          </div>
+          <div class="dashboard-module-content">
+            <div class="dashboard-module-header">
+              <div class="dashboard-module-icon">
+                <i data-lucide="shield-alert"></i>
+              </div>
+              <div class="dashboard-module-arrow">
+                <i data-lucide="arrow-right"></i>
+              </div>
+            </div>
+            <div class="dashboard-module-text">
+              <h3>Cyber Fraud Assistant</h3>
+              <p>Preserve evidence, freeze target bank accounts immediately, and coordinate formal cybercrime reporting.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lost Wallet -->
+        <div class="glass-card glass-card-hover animated-border-card dashboard-module-card" onclick="app.openModule('wallet')">
+          <div class="dashboard-card-img-wrapper">
+            <img src="assets/lost_wallet.png" alt="Lost Wallet Recovery" class="dashboard-card-img">
+            <div class="dashboard-card-img-overlay"></div>
+          </div>
+          <div class="dashboard-module-content">
+            <div class="dashboard-module-header">
+              <div class="dashboard-module-icon">
+                <i data-lucide="wallet"></i>
+              </div>
+              <div class="dashboard-module-arrow">
+                <i data-lucide="arrow-right"></i>
+              </div>
+            </div>
+            <div class="dashboard-module-text">
+              <h3>Lost Wallet Recovery</h3>
+              <p>Checklist generated based on lost items: cards block, ID replacements, and monitoring.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Travel Assistant -->
+        <div class="glass-card glass-card-hover animated-border-card purple-glow dashboard-module-card purple-card" onclick="app.openModule('travel')">
+          <div class="dashboard-card-img-wrapper">
+            <img src="assets/travel_emergency.jpg" alt="Travel Emergency Help" class="dashboard-card-img">
+            <div class="dashboard-card-img-overlay"></div>
+          </div>
+          <div class="dashboard-module-content">
+            <div class="dashboard-module-header">
+              <div class="dashboard-module-icon">
+                <i data-lucide="map-pin"></i>
+              </div>
+              <div class="dashboard-module-arrow">
+                <i data-lucide="arrow-right"></i>
+              </div>
+            </div>
+            <div class="dashboard-module-text">
+              <h3>Travel Emergency Help</h3>
+              <p>Interactive radar map finder, transit re-booking links, and hospital/police navigation filters.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Scam & Content Analyzer -->
+        <div class="glass-card glass-card-hover animated-border-card dashboard-module-card" onclick="app.openModule('analyzer')">
+          <div class="dashboard-card-img-wrapper">
+            <img src="assets/scam_analyzer.jpg" alt="AI Scam & Content Analyzer" class="dashboard-card-img">
+            <div class="dashboard-card-img-overlay"></div>
+          </div>
+          <div class="dashboard-module-content">
+            <div class="dashboard-module-header">
+              <div class="dashboard-module-icon">
+                <i data-lucide="file-search"></i>
+              </div>
+              <div class="dashboard-module-arrow">
+                <i data-lucide="arrow-right"></i>
+              </div>
+            </div>
+            <div class="dashboard-module-text">
+              <h3>AI Scam & Content Analyzer</h3>
+              <p>Scan links, text messages, screenshots, and videos for impersonation, phishing, and fake media elements.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Assistant -->
+        <div class="glass-card glass-card-hover animated-border-card dashboard-module-card purple-glow purple-card" onclick="app.openModule('ai_assistant')">
+          <div class="dashboard-card-img-wrapper">
+            <img src="assets/ai_assistant.png" alt="AI Assistant" class="dashboard-card-img">
+            <div class="dashboard-card-img-overlay"></div>
+          </div>
+          <div class="dashboard-module-content">
+            <div class="dashboard-module-header">
+              <div class="dashboard-module-icon">
+                <i data-lucide="bot"></i>
+              </div>
+              <div class="dashboard-module-arrow">
+                <i data-lucide="arrow-right"></i>
+              </div>
+            </div>
+            <div class="dashboard-module-text">
+              <h3>AI Assistant</h3>
+              <p>Get instant guidance for emergencies and everyday questions through an intelligent conversational assistant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       VIEW 3: WORKSPACES WRAPPER (INDIVIDUAL MODULES)
+       ========================================================================== -->
+  <div id="workspace-view" class="view hidden">
+    <div class="workspace-container">
+      
+      <!-- Back Navigation & Breadcrumbs -->
+      <div class="workspace-header">
+        <div>
+          <div class="workspace-breadcrumbs">
+            <a href="#" onclick="app.showPage('dashboard')">Dashboard</a>
+            <span class="breadcrumbs-sep">></span>
+            <span class="breadcrumbs-current" id="workspace-breadcrumb-active">Lost Phone Recovery</span>
+          </div>
+          <div class="workspace-title">
+            <div class="dashboard-module-icon" id="workspace-module-icon-container">
+              <i data-lucide="smartphone" id="workspace-module-icon"></i>
+            </div>
+            <div>
+              <h2 id="workspace-module-title">Lost Phone Recovery</h2>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 2px;" id="workspace-module-subtitle">Intelligent recovery diagnostics and active safety checklists.</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="app.showPage('dashboard')">
+          <i data-lucide="arrow-left"></i> Back to Dashboard
+        </button>
+      </div>
+
+      <!-- Workspace Responsive Columns -->
+      <div class="workspace-grid">
+        
+        <!-- Left Panel: Guided Questions / Form Input -->
+        <div class="glass-card workspace-panel" id="workspace-input-panel">
+          <div class="panel-progress-container">
+            <div class="panel-progress-bar" id="workspace-progress-bar"></div>
+          </div>
+          
+          <!-- Container for dynamic questions of each module -->
+          <div class="question-flow" id="workspace-questions-container">
+            <!-- Questions injected by JS -->
+          </div>
+
+          <!-- Universal Situation Input Panel -->
+          <div id="workspace-universal-input-container" class="hidden">
+            <div class="universal-input-divider">
+              <span>OR DESCRIBE YOUR SITUATION</span>
+            </div>
+            <div class="universal-input-wrapper">
+              <textarea id="universal-situation-input" placeholder="Describe your situation..."></textarea>
+              <button class="btn btn-primary" onclick="app.submitSituationText()" title="Send Description">
+                <i data-lucide="send"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Panel: Checklist / Output results -->
+        <div class="glass-card workspace-panel workspace-results-panel" id="workspace-results-panel">
+          <!-- Waiting State Placeholder -->
+          <div style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary);" id="results-waiting-placeholder">
+            <i data-lucide="help-circle" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto;"></i>
+            <h3>Awaiting Diagnostics</h3>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Please complete the diagnostic questions on the left to generate your custom action plan.</p>
+          </div>
+
+          <!-- Loading Scan State (Skeleton) -->
+          <div class="skeleton-container hidden" id="results-loading-skeleton">
+            <div class="skeleton-line skeleton-title"></div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 1.5rem;">
+              <i data-lucide="loader" class="animate-spin" style="color: var(--accent-orange); animation: radarSweepRotate 1s linear infinite;"></i>
+              <span style="font-size: 0.9rem; color: var(--accent-orange); font-weight: 600;" id="skeleton-loading-text">AI Core generating custom response...</span>
+            </div>
+            <div class="skeleton-line skeleton-text-lg"></div>
+            <div class="skeleton-line skeleton-text-md"></div>
+            <div class="skeleton-line skeleton-text-sm"></div>
+            <br>
+            <div class="skeleton-line skeleton-title"></div>
+            <div class="skeleton-line skeleton-text-lg"></div>
+            <div class="skeleton-line skeleton-text-md"></div>
+          </div>
+
+          <!-- Active Action Plan / Map View Content -->
+          <div class="hidden" id="results-active-content" style="width:100%;">
+            <!-- Header elements will be injected here (Progress tracker summary) -->
+            <div id="results-content-header" style="margin-bottom: 1.5rem;"></div>
+            
+            <!-- Specific workspace details (e.g. Map widget for Travel, Drop Report for Analyzer) -->
+            <div id="results-special-widget" style="margin-bottom: 2rem;"></div>
+
+            <!-- Priority Checklist -->
+            <div id="results-checklist-container"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-out History Panel -->
+  <div id="history-panel" class="slide-panel">
+    <div class="slide-panel-backdrop" onclick="app.toggleHistoryPanel(false)"></div>
+    <div class="slide-panel-content glass-card">
+      <div class="slide-panel-header">
+        <h3><i data-lucide="history" style="color: var(--accent-orange); width: 22px; height: 22px;"></i> Incident History</h3>
+        <button class="close-btn" onclick="app.toggleHistoryPanel(false)">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="slide-panel-body" id="history-items-container">
+        <!-- Dynamic history items -->
+      </div>
+      <div class="slide-panel-footer">
+        <button class="btn btn-secondary btn-sm" onclick="app.clearAllHistory()">Clear All History</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-out Settings Panel -->
+  <div id="settings-panel" class="slide-panel">
+    <div class="slide-panel-backdrop" onclick="app.toggleSettingsPanel(false)"></div>
+    <div class="slide-panel-content glass-card">
+      <div class="slide-panel-header">
+        <h3><i data-lucide="settings" style="color: var(--accent-purple); width: 22px; height: 22px;"></i> Settings</h3>
+        <button class="close-btn" onclick="app.toggleSettingsPanel(false)">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="slide-panel-body">
+        <div class="settings-group">
+          <!-- Appearance -->
+          <div class="glass-card settings-card">
+            <div class="settings-card-header">
+              <span>🌙 Appearance</span>
+              <i data-lucide="chevron-right"></i>
+            </div>
+            <div class="settings-card-body">
+              <div class="settings-input-block">
+                <label>Theme</label>
+                <div class="theme-selector-group">
+                  <button class="theme-btn" id="theme-btn-dark" onclick="app.setThemeSetting('dark')">Dark</button>
+                  <button class="theme-btn" id="theme-btn-light" onclick="app.setThemeSetting('light')">Light</button>
+                  <button class="theme-btn" id="theme-btn-system" onclick="app.setThemeSetting('system')">System</button>
+                </div>
+              </div>
+              <div class="settings-input-block" style="margin-top: 15px;">
+                <label>Accent Color</label>
+                <div class="accent-picker-grid">
+                  <div class="accent-color-option" style="color: #ff7a00; background: rgba(255, 122, 0, 0.1);" id="accent-opt-orange" onclick="app.setAccentSetting('orange')" title="Orange Glow"></div>
+                  <div class="accent-color-option" style="color: #00e676; background: rgba(0, 230, 118, 0.1);" id="accent-opt-green" onclick="app.setAccentSetting('green')" title="Green Matrix"></div>
+                  <div class="accent-color-option" style="color: #7c4dff; background: rgba(124, 77, 255, 0.1);" id="accent-opt-purple" onclick="app.setAccentSetting('purple')" title="Purple Storm"></div>
+                  <div class="accent-color-option" style="color: #00d2ff; background: rgba(0, 210, 255, 0.1);" id="accent-opt-cyan" onclick="app.setAccentSetting('cyan')" title="Cyan Ice"></div>
+                </div>
+              </div>
+              <div class="settings-toggle-row" style="margin-top: 15px;">
+                <span>Compact Mode</span>
+                <label class="switch-control">
+                  <input type="checkbox" id="setting-compact-mode" onchange="app.toggleCompactMode(this.checked)">
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="glass-card settings-card">
+            <div class="settings-card-header">
+              <span>🌐 Language</span>
+              <i data-lucide="chevron-right"></i>
+            </div>
+            <div class="settings-card-body">
+              <div class="settings-input-block">
+                <label for="setting-language">Preferred Language</label>
+                <select id="setting-language">
+                  <option value="en">English (US)</option>
+                  <option value="es">Español (Spanish)</option>
+                  <option value="fr">Français (French)</option>
+                  <option value="hi">हिन्दी (Hindi)</option>
+                </select>
+              </div>
+              <div class="settings-input-block">
+                <label for="setting-date-format">Preferred Date Format</label>
+                <select id="setting-date-format">
+                  <option value="local">Local Time (HH:MM AM/PM)</option>
+                  <option value="iso">ISO 8601 (YYYY-MM-DD HH:MM)</option>
+                  <option value="12h">12-Hour (MM/DD/YYYY hh:mm:ss)</option>
+                  <option value="24h">24-Hour (DD/MM/YYYY HH:MM:ss)</option>
+                </select>
+              </div>
+              <button class="btn btn-primary btn-sm" style="margin-top: 15px; width: 100%;" onclick="app.saveLanguageSettings()">Save Changes</button>
+            </div>
+          </div>
+
+          <!-- AI Assistant Settings -->
+          <div class="glass-card settings-card">
+            <div class="settings-card-header">
+              <span>🤖 AI Assistant</span>
+              <i data-lucide="chevron-right"></i>
+            </div>
+            <div class="settings-card-body">
+              <div class="settings-input-block">
+                <label>Conversation Style</label>
+                <select id="setting-ai-style" onchange="app.saveAISettings()">
+                  <option value="balanced">Balanced</option>
+                  <option value="professional">Professional</option>
+                  <option value="friendly">Friendly</option>
+                  <option value="concise">Concise</option>
+                </select>
+              </div>
+              <div class="settings-input-block">
+                <label>Response Length</label>
+                <select id="setting-ai-length" onchange="app.saveAISettings()">
+                  <option value="short">Short</option>
+                  <option value="medium">Medium</option>
+                  <option value="detailed">Detailed</option>
+                </select>
+              </div>
+              <div class="settings-toggle-row">
+                <span>Follow-up Questions</span>
+                <label class="switch-control">
+                  <input type="checkbox" id="setting-ai-followups" onchange="app.saveAISettings()">
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+              <div class="settings-toggle-row">
+                <span>Suggested Prompts</span>
+                <label class="switch-control">
+                  <input type="checkbox" id="setting-ai-prompts" onchange="app.saveAISettings()">
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 15px; width: 100%; border-color: rgba(255, 56, 56, 0.3); color: var(--color-critical);" onclick="app.clearChatSessionHistory()">Clear Chat History</button>
+            </div>
+          </div>
+
+          <!-- History & Privacy -->
+          <div class="glass-card settings-card">
+            <div class="settings-card-header">
+              <span>📜 History & Privacy</span>
+              <i data-lucide="chevron-right"></i>
+            </div>
+            <div class="settings-card-body">
+              <div class="settings-toggle-row" style="margin-top: 0;">
+                <span>Store Local History</span>
+                <label class="switch-control">
+                  <input type="checkbox" id="setting-privacy-store" onchange="app.savePrivacySettings()">
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+              <div class="settings-input-block">
+                <label for="setting-privacy-duration">Auto-delete History</label>
+                <select id="setting-privacy-duration" onchange="app.savePrivacySettings()">
+                  <option value="never">Never (Keep Forever)</option>
+                  <option value="1">After 1 Day</option>
+                  <option value="7">After 7 Days</option>
+                  <option value="30">After 30 Days</option>
+                </select>
+              </div>
+              <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                <span>Stored Incidents:</span>
+                <strong id="settings-history-count" style="color: var(--accent-orange);">0</strong>
+              </div>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 15px; width: 100%; border-color: rgba(255, 56, 56, 0.4); color: var(--color-critical);" onclick="app.clearAllHistory()">Clear All History</button>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="glass-card settings-card">
+            <div class="settings-card-header">
+              <span>📍 Location</span>
+              <i data-lucide="chevron-right"></i>
+            </div>
+            <div class="settings-card-body">
+              <div class="settings-toggle-row" style="margin-top: 0;">
+                <span>Use Current Location (GPS)</span>
+                <label class="switch-control">
+                  <input type="checkbox" id="setting-location-gps" onchange="app.toggleGPSLocation(this.checked)">
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+              <div class="settings-input-block">
+                <label for="setting-location-manual">Manual City, Country</label>
+                <input type="text" id="setting-location-manual" placeholder="New Delhi, India">
+              </div>
+              <div class="settings-toggle-row">
+                <span>Location-based Recommendations</span>
+                <label class="switch-control">
+                  <input type="checkbox" id="setting-location-recs" onchange="app.saveLocationSettings()">
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+              <button class="btn btn-primary btn-sm" style="margin-top: 15px; width: 100%;" onclick="app.saveLocationSettings()">Save Location</button>
+            </div>
+          </div>
+
+          <!-- Emergency Contacts -->
+          <div class="glass-card settings-card">
+            <div class="settings-card-header">
+              <span>🆘 Emergency Contacts</span>
+              <i data-lucide="chevron-right"></i>
+            </div>
+            <div class="settings-card-body">
+              <div class="emergency-contacts-list" id="settings-contacts-list">
+                <!-- Contacts loaded dynamically from app.js -->
+              </div>
+              <div class="contact-form">
+                <div class="settings-input-block" style="margin-top: 0;">
+                  <label for="contact-new-name">Contact Name</label>
+                  <input type="text" id="contact-new-name" placeholder="John Doe">
+                </div>
+                <div class="contact-form-row">
+                  <div class="settings-input-block" style="margin-top: 0;">
+                    <label for="contact-new-phone">Phone Number</label>
+                    <input type="tel" id="contact-new-phone" placeholder="+91 99999-XXXXX">
+                  </div>
+                  <div class="settings-input-block" style="margin-top: 0;">
+                    <label for="contact-new-rel">Relationship</label>
+                    <input type="text" id="contact-new-rel" placeholder="Spouse / Friend">
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-sm" style="margin-top: 10px; width: 100%; background: linear-gradient(135deg, var(--accent-purple) 0%, #6200ea 100%);" onclick="app.addNewEmergencyContact()">Add Emergency Contact</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- About -->
+          <div class="glass-card settings-card">
+            <div class="settings-card-header">
+              <span>ℹ️ About</span>
+              <i data-lucide="chevron-right"></i>
+            </div>
+            <div class="settings-card-body">
+              <p style="margin-bottom: 8px;"><strong>Crisis Assist Emergency Core</strong></p>
+              <p style="margin-bottom: 8px; font-size: 0.8rem;">Version: 4.2.1-Prod (Build 2026.06)</p>
+              <p style="margin-bottom: 12px; font-size: 0.8rem;">Engineered for high stress scenarios where quick decisions make all the difference. All operations are run securely in local sandboxed memory.</p>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <a href="#" style="color: var(--accent-purple); font-size: 0.8rem; text-decoration: underline;" onclick="alert('Privacy Policy: All data stored locally.')">Privacy Policy</a>
+                <a href="#" style="color: var(--accent-purple); font-size: 0.8rem; text-decoration: underline;" onclick="alert('Terms: Open Source MIT License.')">Terms of Service</a>
+              </div>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 15px; width: 100%;" onclick="alert('Feedback form launched in background.')">Contact / Feedback</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External JS File -->
+  <script src="app.js"></script>
+</body>
+</html>
